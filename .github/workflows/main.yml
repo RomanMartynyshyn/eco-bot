@@ -30,7 +30,9 @@ jobs:
           context: .
           # push: true тільки якщо це не Pull Request
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/bot:${{ github.sha }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/bot:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/bot:latest
           # Кешування GHA (GitHub Actions)
           cache-from: type=gha
           cache-to: type=gha,mode=max
