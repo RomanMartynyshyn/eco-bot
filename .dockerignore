@@ -1,0 +1,25 @@
+# env files
+.env
+.env.example
+
+# git files
+.git
+.gitignore
+.github/
+
+# python / build files
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDEs
+.idea/
+.vscode/
+
