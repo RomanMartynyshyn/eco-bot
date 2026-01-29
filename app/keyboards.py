@@ -91,7 +91,7 @@ def what_do() -> ReplyKeyboardMarkup:
         text="Повідомити про проблему"
     )
     see_problems = KeyboardButton(
-        text="Переглянути подані проблеми"
+        text="Переглянути подані мною проблеми"
     )
 
     # 2. Create keyboard

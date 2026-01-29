@@ -36,3 +36,28 @@ jobs:
           # Кешування GHA (GitHub Actions)
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Checkout Infra Repository
+        uses: actions/checkout@v4
+        with:
+          repository: RomanMartynyshyn/eco-infra
+          token: ${{ secrets.GH_PAT }}
+          path: eco-infra
+
+      - name: Update Image Tag in Deployment
+        run: |
+          cd eco-infra
+          # Оновлюємо тег образу на поточний хеш коміту (короткий або повний)
+          sed -i "s|image: .*|image: ${{ secrets.DOCKERHUB_USERNAME }}/bot:${{ github.sha }}|g" eco-bot/deployment.yaml
+          
+          # Налаштовуємо git для коміту
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          
+          # Перевіряємо, чи є зміни, і пушимо
+          if [[ -n $(git status -s) ]]; then
+            git commit -am "Update image tag to ${{ github.sha }}"
+            git push
+          else
+            echo "No changes to commit"
+          fi
