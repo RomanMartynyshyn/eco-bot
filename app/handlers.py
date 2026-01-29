@@ -83,7 +83,7 @@ async def get_markers_page_text(markers, page: int, items_per_page: int = 5):
     return response_text
 
 # 3. Оновлений основний хендлер натискання кнопки "Переглянути подані проблеми"
-@router.message(F.text == "Переглянути подані проблеми")
+@router.message(F.text == "Переглянути подані мною проблеми")
 async def get_reports(message: Message):
     user_id = message.from_user.id
     markers = await req.get_markers(user_id)
