@@ -4,7 +4,10 @@ import logging
 # This file contains function for interaction with backend api
 
 # Main api url
-URL = "http://backend:8000"
+import os
+
+# Main api url
+URL = os.getenv("BACKEND_URL", "http://backend:8000")
 
 # Func to create marker
 async def post_marker(payload: dict) -> httpx.Response | None:
