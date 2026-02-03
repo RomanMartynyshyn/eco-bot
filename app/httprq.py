@@ -7,7 +7,7 @@ import logging
 import os
 
 # Main api url
-URL = os.getenv("BACKEND_URL", "http://backend:8000")
+URL = os.getenv("BACKEND_URL", "http://eco-backend:8000")
 
 # Func to create marker
 async def post_marker(payload: dict) -> httpx.Response | None:

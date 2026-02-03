@@ -251,13 +251,11 @@ async def process_location(message: Message, state: FSMContext):
 
 # 2. Обробка ручного введення (якщо натиснули "Ввести вручну")
 
-
 @router.message(ReportProblem.waiting_for_location, F.text == "📝 Ввести вручну")
 async def ask_manual_location(message: Message):
-    await message.answer("Напишіть координати вручну:")
+    await message.answer("Напишіть координати в форматі (широта, довгота). Наприклад: 42.123456, 24.123456")
 
 # 3. Обробка тексту замість локації (якщо ввели вручну)
-
 
 @router.message(ReportProblem.waiting_for_location, F.text)
 async def process_manual_location(message: Message, state: FSMContext):
@@ -266,7 +264,6 @@ async def process_manual_location(message: Message, state: FSMContext):
     await show_summary(message, state)
 
 # Допоміжна функція для показу підсумку (щоб не дублювати код)
-
 
 async def show_summary(message: Message, state: FSMContext):
     data = await state.get_data()
@@ -319,7 +316,7 @@ async def finish_report(message: Message, state: FSMContext):
             "lng": lng
         },
         "description": data.get("problem_text"),
-        "photo_id": data.get("problem_photo"),  # Photo id requaire string value
+        "photo_id": data.get("problem_photo"),
         "user_id": message.from_user.id,
         "problem_type_id": int(data.get("problem_type_id")),
         "timestamp": message.date.isoformat(timespec='milliseconds').replace('+00:00', 'Z')
