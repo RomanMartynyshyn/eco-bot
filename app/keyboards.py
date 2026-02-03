@@ -43,9 +43,9 @@ def get_categories_kb():
     builder.adjust(2)
     return builder.as_markup()
 
-def get_problems_kb(cat_id: str):
+async def get_problems_kb(cat_id: str):
     builder = InlineKeyboardBuilder()
-    problems_data = pb_l.load_problems()
+    problems_data = await pb_l.load_problems()
     # Фільтруємо проблеми, що починаються з цифри категорії (наприклад "1")
     for pid, pname in problems_data.items():
         if pid.startswith(cat_id):

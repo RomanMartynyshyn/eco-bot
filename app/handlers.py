@@ -197,7 +197,7 @@ async def process_category_click(callback: types.CallbackQuery, callback_data: k
 
     await callback.message.edit_text(
         "Оберіть конкретний тип:",
-        reply_markup=kb.get_problems_kb(callback_data.cat_id)
+        reply_markup=await kb.get_problems_kb(callback_data.cat_id)
     )
     await callback.answer()
 
